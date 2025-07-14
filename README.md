@@ -46,7 +46,7 @@ leaderboards, and reminders to keep everyone motivated throughout October.
 ### 1. Project Setup & PWA Foundation
 
 **Front-End**
-- [ ] Scaffold Vite + React + TypeScript project
+- [x] Scaffold Vite + React + TypeScript project
   - Project structure, ...
 - [ ] (optional) Configure Web App Manifest (icons, name, start_url) for PWA support
 - [ ] Create initial design system in Figma (mobile-first): colors, typography, buttons
