@@ -1,69 +1,37 @@
-# React + TypeScript + Vite
+# Vite + React App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is built using Vite and React, with a focus on fast development and modern tooling.
 
-Currently, two official plugins are available:
+## ⚙️ Requirements
+Node.js v24
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project requires Node.js version 24.
+Enforced via .nvmrc (for nvm users).
+Also specified in package.json under the engines field.
+pnpm
+The project uses pnpm for managing dependencies.
+To install pnpm globally:
 
-## Expanding the ESLint configuration
+`npm install -g pnpm`
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🚀 Getting Started
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+1. Set up environment variables
+   Copy the environment template and edit it as needed:
+`cp .env.template .env`
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+2. Install dependencies
+   `pnpm install` (if you have _nvm_ installed you can use `nvm exec pnpm install`, which enforces node v24) _nvm enforces to use 
+ projects node version which ensures compatibility and same environment as production_
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+3. Start the development server
+   `pnpm dev` (`nvm exec pnpm dev`)
+   The app will be running at: http://localhost:5173
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 🛠 Troubleshooting
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Make sure you are using Node.js v24. If using nvm, run:
+nvm use
+If you encounter dependency issues, try clearing everything and reinstalling:
+rm -rf node_modules pnpm-lock.yaml
+pnpm install
