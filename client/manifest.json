@@ -1,0 +1,21 @@
+{
+    "name": "Sober October App",
+    "short_name": "SOctober",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#227EFB",
+    "icons": [
+        {
+            "src": "/icons/october192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+          "src": "/icons/october512.png",
+          "type": "image/png",
+          "sizes": "512x512"
+        }
+    ]
+}
+  
