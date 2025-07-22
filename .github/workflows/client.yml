@@ -3,10 +3,6 @@ on:
     paths:
       - 'client/**'
       - '.github/workflows/client.yml'
-  pull_request:
-    paths:
-      - 'client/**'
-      - '.github/workflows/client.yml'
 
 jobs:
   client-ci:
