@@ -1,3 +1,4 @@
+# .github/workflows/api.yml
 on:
   push:
     paths:
@@ -8,23 +9,29 @@ jobs:
   api-ci:
     runs-on: ubuntu-latest
 
+    # These will be injected into your test process as process.env.DB_*
     env:
-      DB_HOST: localhost
-      DB_PORT: 3306
-      DB_USERNAME: root
-      DB_PASSWORD: root
+      DB_HOST:     localhost
+      DB_PORT:     '3306'
+      DB_USERNAME: ciuser
+      DB_PASSWORD: cipassword
       DB_DATABASE: sober-october
 
     services:
       mysql:
         image: mysql:8
-        ports: [ '3306:3306' ]
+        ports: ['3306:3306']
         env:
-          MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-          MYSQL_DATABASE: ${DB_DATABASE}
-          MYSQL_ROOT_HOST: '%'
+          # root password for initial setup
+          MYSQL_ROOT_PASSWORD: root
+          # create your CI user & DB
+          MYSQL_DATABASE:      sober-october
+          MYSQL_USER:          ciuser
+          MYSQL_PASSWORD:      cipassword
+          # allow TCP connections from anywhere
+          MYSQL_ROOT_HOST:     '%'
         options: >-
-          --health-cmd "mysqladmin ping -h localhost -p${{ secrets.DB_PASSWORD }}"
+          --health-cmd "mysqladmin ping -h localhost -pcipassword"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 3
@@ -44,15 +51,17 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '24'
-          cache: 'pnpm'
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 10
 
-      - run: pnpm install
+      - name: Install dependencies
+        run: pnpm install
 
-      - run: pnpm build
+      - name: Build
+        run: pnpm build
 
-      - run: make test-ci
+      - name: Run tests
+        run: make test-ci
