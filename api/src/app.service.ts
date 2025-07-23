@@ -7,7 +7,7 @@ export class AppService {
   constructor(
       private cfg: ConfigService<EnvSchema>
   ) {
-    console.log("env test log", this.cfg.get("DB_URL"))
+    console.log("env test log", this.cfg.get("DB_HOST"))
   }
 
 

@@ -9,7 +9,6 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      DB_URL: empty
       DB_HOST: localhost
       DB_PORT: 3306
       DB_USERNAME: root
