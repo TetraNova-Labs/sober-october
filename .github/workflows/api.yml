@@ -7,18 +7,53 @@ on:
 jobs:
   api-ci:
     runs-on: ubuntu-latest
+
+    env:
+      DB_URL: empty
+      DB_HOST: localhost
+      DB_PORT: 3306
+      DB_USERNAME: root
+      DB_PASSWORD: root
+      DB_DATABASE: sober-october
+
+    services:
+      mysql:
+        image: mysql:8
+        ports: [ '3306:3306' ]
+        env:
+          MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+          MYSQL_DATABASE: ${DB_DATABASE}
+          MYSQL_ROOT_HOST: '%'
+        options: >-
+          --health-cmd "mysqladmin ping -h localhost -p${{ secrets.DB_PASSWORD }}"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 3
+
     defaults:
       run:
         working-directory: api
+
     strategy:
       matrix:
         node-version: [24]
+
     steps:
       - uses: actions/checkout@v4
+
+      - name: Setup Node.js & pnpm
+        uses: actions/setup-node@v3
+        with:
+          node-version: '24'
+          cache: 'pnpm'
+
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 10
+
       - run: pnpm install
+
       - run: pnpm build
+
       - run: make test-ci
