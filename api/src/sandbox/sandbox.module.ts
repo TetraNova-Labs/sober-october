@@ -1,6 +1,5 @@
-import {Module} from "@nestjs/common";
-import {UserModule} from "../user/user.module";
-
+import { Module } from '@nestjs/common';
+import { UserModule } from '../user/user.module';
 
 /*
     This module imports the UserModule, where the UserEntity relies.
@@ -14,6 +13,6 @@ import {UserModule} from "../user/user.module";
     which will need to be used inside another module
  */
 @Module({
-    imports: [UserModule]
+  imports: [UserModule],
 })
 export class SandboxModule {}
