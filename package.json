@@ -2,7 +2,10 @@
   "name": "sober-october",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "lint-staged": {
+    "client/**/*.{js,ts,jsx,tsx}": "bash -c 'cd client && pnpm run lint || exit 1'",
+    "api/**/*.{js,ts}": "bash -c 'cd api && pnpm run lint || exit 1'"
+  },
   "scripts": {
     "prepare": "husky"
   },
@@ -13,10 +16,5 @@
   "devDependencies": {
     "husky": "^9.1.7",
     "lint-staged": "^16.1.2"
-  },
-
-  "lint-staged": {
-    "client/**/*.{js,ts,jsx,tsx}": "cd client && pnpm run lint",
-    "api/**/*.{js,ts}": "cd api && pnpm run lint"
   }
 }
