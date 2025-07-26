@@ -8,6 +8,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { SandboxModule } from './sandbox/sandbox.module';
 import { UserModule } from './user/user.module';
 import { SandboxController } from './sandbox/sandbox.controller';
+import { AppDataSource } from '../dataSource';
 
 @Module({
   imports: [
@@ -15,18 +16,10 @@ import { SandboxController } from './sandbox/sandbox.controller';
       load: [configuration],
       validate: (config) => envSchema.parse(config),
     }),
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: process.env.DB_HOST || 'localhost',
-      port: Number(process.env.DB_PORT) || 3306,
-      username: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_DATABASE,
-      /*entities: [
-              User
-          ],*/
-      synchronize: false,
-      autoLoadEntities: true,
+    TypeOrmModule.forRootAsync({
+      useFactory: () => ({
+        ...AppDataSource.options,
+      }),
     }),
     SandboxModule,
     UserModule,
