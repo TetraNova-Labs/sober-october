@@ -1,23 +1,22 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import {AppModule} from "./app.module";
+import { AppModule } from './app.module';
 
 describe('AppController', () => {
   let appController: AppController;
-  let app: TestingModule
+  let app: TestingModule;
 
   beforeEach(async () => {
     app = await Test.createTestingModule({
-      imports: [AppModule]
+      imports: [AppModule],
     }).compile();
 
     appController = app.get<AppController>(AppController);
   });
 
-  afterAll(async() => {
+  afterAll(async () => {
     await app.close();
-  })
+  });
 
   describe('root', () => {
     it('should return "Hello World!"', () => {
