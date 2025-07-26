@@ -63,5 +63,8 @@ jobs:
       - name: Build
         run: pnpm build
 
+      - name: Run linting
+        run: pnpm lint
+
       - name: Run tests
         run: make test-ci
