@@ -1,0 +1,22 @@
+{
+  "name": "sober-october",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "prepare": "husky"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.11.0",
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.2"
+  },
+
+  "lint-staged": {
+    "client/**/*.{js,ts,jsx,tsx}": "cd client && pnpm run lint",
+    "api/**/*.{js,ts}": "cd api && pnpm run lint"
+  }
+}

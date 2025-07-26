@@ -1,3 +1,25 @@
+# How to run this project
+
+Inside the root of this repository there are two projects
+
+``/api`` which is a NestJs app
+``/client`` which is vite React app
+
+both projects have their own .env variables. The both declare .nvmrc files and should be 
+started via node 24.
+
+If you have installed node via nvm it is enough to be starting any of the following projects
+via the root file *Makefile*
+
+``make prepare-dev-env`` will ensure:
+1) the initial pnpm prepare (setting up husky wich runs linting on pre-commit)
+2) copying the *.env.template* files which are necessary to start either api or client
+
+``make run-api`` starts up the NestJs app
+
+``make run-client`` starts up the react app
+
+
 # 1) Project Description 📚
 
 **October Challenge Tracker** is a mobile-first Progressive Web App (PWA)
