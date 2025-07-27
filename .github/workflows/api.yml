@@ -16,6 +16,7 @@ jobs:
       DB_USERNAME: ciuser
       DB_PASSWORD: cipassword
       DB_DATABASE: sober-october
+      JWT_SECRET: secret
 
     services:
       mysql:
