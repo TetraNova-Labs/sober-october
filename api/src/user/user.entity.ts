@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { UserChallenge } from 'src/user_challenge/user_challenge.entity';
 
 @Entity()
 export class User {
@@ -19,4 +20,7 @@ export class User {
 
   @Column({ default: true })
   isActive: boolean;
+
+  @OneToMany(() => UserChallenge, UserChallenge => UserChallenge.user)
+  userChallenges: UserChallenge[];
 }
