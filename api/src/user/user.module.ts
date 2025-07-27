@@ -12,6 +12,6 @@ import { UserService } from './user.service';
         By re-exporting TypeOrmModule it is possible to use User repository (Repository<User>) outside of this module.
         If commenting out the exports, the server would run to an error! why? check the sandbox.module.ts
      */
-  exports: [TypeOrmModule],
+  exports: [TypeOrmModule, UserService],
 })
 export class UserModule {}
