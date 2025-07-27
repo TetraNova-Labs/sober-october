@@ -22,5 +22,6 @@ import { EnvSchema } from '../config/validationSchema';
   ],
   controllers: [AuthController],
   providers: [AuthService],
+  exports: [AuthService],
 })
 export class AuthModule {}
