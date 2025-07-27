@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import configuration from './config/configuration';
 import { envSchema } from './config/validationSchema';
@@ -9,6 +7,7 @@ import { SandboxModule } from './sandbox/sandbox.module';
 import { UserModule } from './user/user.module';
 import { SandboxController } from './sandbox/sandbox.controller';
 import { AppDataSource } from '../dataSource';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -23,8 +22,9 @@ import { AppDataSource } from '../dataSource';
     }),
     SandboxModule,
     UserModule,
+    AuthModule,
   ],
-  controllers: [AppController, SandboxController],
-  providers: [AppService],
+  controllers: [SandboxController],
+  providers: [],
 })
 export class AppModule {}
