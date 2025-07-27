@@ -1,4 +1,3 @@
-import { User } from 'src/user/user.entity';
 import { UserChallenge } from 'src/user_challenge/user_challenge.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
