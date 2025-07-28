@@ -9,8 +9,8 @@ export class ChallengeService {
     @InjectRepository(Challenge)
     private readonly challengeRepository: Repository<Challenge>,
   ) {}
-  findOne(name: string): Promise<Challenge | null> {
-    return this.challengeRepository.findOneBy({ name });
+  findOne(id: number): Promise<Challenge | null> {
+    return this.challengeRepository.findOneBy({ id });
   }
   findAll(): Promise<Challenge[]> {
     return this.challengeRepository.find({
