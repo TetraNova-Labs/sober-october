@@ -14,6 +14,7 @@ import { AuthModule } from './auth/auth.module';
     ConfigModule.forRoot({
       load: [configuration],
       validate: (config) => envSchema.parse(config),
+      isGlobal: true,
     }),
     TypeOrmModule.forRootAsync({
       useFactory: () => ({
