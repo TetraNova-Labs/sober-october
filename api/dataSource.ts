@@ -6,7 +6,7 @@ export const AppDataSource = new DataSource({
   port: 3306,
   username: 'root',
   password: 'root',
-  database: 'sober-october',
+  database: process.env.DB_NAME,
   synchronize: false,
   logging: false,
   logger: 'file',
