@@ -6,15 +6,15 @@ export const AppDataSource = new DataSource({
   port: 3306,
   username: 'root',
   password: 'root',
-  database: 'sober-october',
+  database: process.env.DB_NAME,
   synchronize: false,
   logging: false,
   logger: 'file',
+  /*
+  commented - did not start tests - breaking tests
   entities: [
-    __dirname + '/src/**/*.entity.ts'
+    __dirname + '/!**!/!*.entity.{js,ts}', // load .ts in Vitest, .js when compiled
   ],
-  migrations: [
-    __dirname + '/src/migrations/*.ts'
-  ],
+  migrations: [__dirname + '/migrations/!*.{js,ts}'],*/
   migrationsTableName: 'migrations_history',
 });

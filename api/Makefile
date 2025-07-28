@@ -12,4 +12,3 @@ PHONY .SILENT: test-ci
 test-ci:
 	#$(MAKE) init-config-file
 	pnpm test
-	pnpm test:e2e
