@@ -10,11 +10,7 @@ export const AppDataSource = new DataSource({
   synchronize: false,
   logging: false,
   logger: 'file',
-  entities: [
-    __dirname + '/src/**/*.entity.ts'
-  ],
-  migrations: [
-    __dirname + '/src/migrations/*.ts'
-  ],
+  entities: [__dirname + '/src/**/*.entity.ts'],
+  migrations: [__dirname + '/src/migrations/*.ts'],
   migrationsTableName: 'migrations_history',
 });
