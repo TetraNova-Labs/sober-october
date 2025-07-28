@@ -10,7 +10,11 @@ export const AppDataSource = new DataSource({
   synchronize: false,
   logging: false,
   logger: 'file',
-  entities: [__dirname + '/src/**/*.entity.ts'],
-  migrations: [__dirname + '/src/migrations/*.ts'],
+  /*
+  commented - did not start tests - breaking tests
+  entities: [
+    __dirname + '/!**!/!*.entity.{js,ts}', // load .ts in Vitest, .js when compiled
+  ],
+  migrations: [__dirname + '/migrations/!*.{js,ts}'],*/
   migrationsTableName: 'migrations_history',
 });
