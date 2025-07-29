@@ -6,19 +6,19 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({type: 'varchar'})
   email: string;
 
-  @Column()
+  @Column({type: 'varchar'})
   password: string;
 
-  @Column()
+  @Column({type: 'varchar'})
   firstName: string;
 
-  @Column()
+  @Column({type: 'varchar'})
   lastName: string;
 
-  @Column({ default: true })
+  @Column({ type: 'boolean', default: true })
   isActive: boolean;
 
   @OneToMany(() => UserChallenge, UserChallenge => UserChallenge.user)

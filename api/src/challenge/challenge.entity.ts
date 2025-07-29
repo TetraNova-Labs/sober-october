@@ -6,7 +6,7 @@ export class Challenge {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({type: 'varchar'})
   name: string;
 
   @OneToMany(() => UserChallenge, UserChallenge => UserChallenge.challenge)
