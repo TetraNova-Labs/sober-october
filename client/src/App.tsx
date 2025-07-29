@@ -1,21 +1,25 @@
-import { useState } from 'react'
-import './App.css'
-import config from "./config.ts";
+import React from "react";
+import { Routes, Route, Link } from "react-router-dom";
+import Home from "./pages/Home";
+import About from "./pages/About";
 
-function App() {
-  const [count, setCount] = useState(0)
-    console.log("Hello");
-
+const App: React.FC = () => {
   return (
-    <>
-        <p>
-            env config dump (test): {config.apiEndpoint}
-        </p>
-        <button onClick={() => setCount(count + 1)}>
-            {count}
-        </button>
-    </>
-  )
-}
+    <div>
+      <nav style={{ marginBottom: 20 }}>
+        <Link to="/" style={{ marginRight: 10 }}>
+          Home
+        </Link>
+        <Link to="/about" style={{ marginRight: 10 }}>
+          About
+        </Link>
+      </nav>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </div>
+  );
+};
 
-export default App
+export default App;
