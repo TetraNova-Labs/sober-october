@@ -19,4 +19,18 @@ export class User {
 
   @Column({ type: 'boolean', default: true })
   isActive: boolean;
+
+  constructor(
+    email: string,
+    password: string,
+    firstName: string,
+    lastName: string,
+    isActive: boolean,
+  ) {
+    this.email = email;
+    this.password = password;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.isActive = isActive;
+  }
 }

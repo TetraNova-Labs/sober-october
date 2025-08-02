@@ -1,5 +1,5 @@
 
-.PHONY: prepare-dev-env
+.PHONY:
 prepare-dev-env:
 	echo "Preparing dev environment ..."
 	pnpm prepare

@@ -1,3 +1,5 @@
+import 'reflect-metadata';
+
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { TestModule } from './test.module';
