@@ -14,11 +14,13 @@ export class UserManagement {
   ) {}
 
   public async givenUser(input: UserInput) {
-    const user = new User('1', '2', 'a', 'b', true);
-    return await this.userRepository.save(user);
+    return await this.userRepository.save({
+      ...this.defaultFieldsFactory(),
+      ...input,
+    });
   }
 
-  /*  private defaultFieldsFactory(): Omit<User, 'id'> {
+  private defaultFieldsFactory(): Omit<User, 'id'> {
     this.uniqueCounter++;
     return {
       email: `${this.uniqueCounter}email@email.com`,
@@ -27,5 +29,5 @@ export class UserManagement {
       lastName: 'Doe',
       isActive: true,
     };
-  }*/
+  }
 }

@@ -11,6 +11,7 @@ export const AppDataSource = new DataSource({
   database: 'sober-october-test',
   synchronize: false,
   logging: false,
+  entities: [__dirname + '/../**/*.entity.js'],
   migrations: [path.join(__dirname, 'src', 'migrations', '*.{js,ts}')],
   migrationsTableName: 'migrations_history',
 });
