@@ -12,3 +12,9 @@ PHONY .SILENT: test-ci
 test-ci:
 	#$(MAKE) init-config-file
 	pnpm test
+
+
+PHONY .SILENT: lint-fix # Is ran as a pre-commit hook
+lint-fix:
+	${NVM_DIR}/nvm-exec pnpm lint
+	npx prettier . --fix
