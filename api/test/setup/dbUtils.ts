@@ -1,4 +1,4 @@
-import { AppDataSource } from "../../dataSource";
+import AppDataSource from "../../dataSource";
 
 export const clearDatabase = async () => {
   const entities = AppDataSource.entityMetadatas;

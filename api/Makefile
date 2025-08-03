@@ -1,6 +1,7 @@
 .PHONY: env test-e2e
 
 # Copy your e2e env into .env so ConfigModule.forRoot() picks it up
+PHONY .SILENT: env
 env:
 	cp .env.e2e .env
 
