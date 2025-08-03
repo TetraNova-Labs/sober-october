@@ -39,9 +39,11 @@ all:
 	echo "Starting docker containers"
 	make start-containers
 
-	echo "Running muigrations"
-	cd api && ${NVM_DIR}/nvm-exec pnpm migration:run
-
 	echo "Installing dependencies"
 	make install-api && make install-client
+
+	echo "Running migrations"
+	cd api && ${NVM_DIR}/nvm-exec pnpm migration:run
+
+
 
