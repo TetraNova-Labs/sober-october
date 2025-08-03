@@ -1,11 +1,25 @@
+import AppDataSource from "../../dataSource";
+
 export const clearDatabase = async () => {
-  /*  // TODO - loading datasource (testovací db)
-  const dataSource = moduleRef.get<DataSource>(getDataSourceToken());
-
-  const entities = dataSource.entityMetadatas;
-
+  const entities = AppDataSource.entityMetadatas;
   for (const entity of entities) {
-    const repository = dataSource.getRepository(entity.name);
-    await repository.query(`DELETE FROM \`${entity.tableName}\`;`);
-  }*/
+    const repo = AppDataSource.getRepository(entity.name);
+    await repo.query(`TRUNCATE TABLE \`${entity.tableName}\`;`);
+  }
+};
+
+export const setupDatabase = async () => {
+  if (!AppDataSource.isInitialized) {
+    await AppDataSource.initialize();
+  }
+
+  await AppDataSource.dropDatabase();
+  await AppDataSource.runMigrations();
+};
+
+export const teardownDatabase = async () => {
+  if (AppDataSource.isInitialized) {
+    await AppDataSource.dropDatabase();
+    await AppDataSource.destroy();
+  }
 };

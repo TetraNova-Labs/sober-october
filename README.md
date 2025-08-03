@@ -11,7 +11,17 @@ started via node 24.
 If you have installed node via nvm it is enough to be starting any of the following projects
 via the root file *Makefile*
 
-``make prepare-dev-env`` will ensure:
+## Initial setup
+
+``make all``
+- sets up the environment. On the first try it will fail because you need to create
+database in started container. so let it fail then via adminer (localhost:8085) create database `sober-october`
+then run the command again
+- it essentially copies the env variables for both projects and prepares husky, then in starts the containers, scaffolds the database (migrations) and lastly
+it installs dependecies for both projects
+
+
+``make prepare-dev-env`` will ensure: (it is part of the ``make all`` command)
 1) the initial pnpm prepare (setting up husky wich runs linting on pre-commit)
 2) copying the *.env.template* files which are necessary to start either api or client
 

@@ -1,32 +1,43 @@
-import { INestApplication } from '@nestjs/common';
-import { afterAll, beforeAll, beforeEach, describe, expect } from 'vitest';
-import { createTestingApplication } from '../setup/testApplication.setup';
-import request from 'supertest';
+import { INestApplication } from "@nestjs/common";
+import { afterAll, beforeAll, beforeEach, describe, expect } from "vitest";
+import { createTestApplication } from "../setup/testApplication.setup";
+import request from "supertest";
+import { UserManagement } from "./user.management";
+import { TestingModule } from "@nestjs/testing";
+import {
+  clearDatabase,
+  setupDatabase,
+  teardownDatabase,
+} from "../setup/dbUtils";
+import { User } from "../../src/user/user.entity";
 
-describe('MOCK TEST...', () => {
-  let app: INestApplication;
-  let httpRequest: () => ReturnType<typeof request>;
+describe("UserController (e2e)", () => {
+  let application: INestApplication;
+  let module: TestingModule;
+  let userManagement: UserManagement;
 
   beforeAll(async () => {
-    ({ app } = await createTestingApplication());
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    httpRequest = () => request(app.getHttpServer());
+    ({ application, module } = await createTestApplication());
+    await setupDatabase();
+    userManagement = await module.resolve(UserManagement);
   });
 
   afterAll(async () => {
-    await app.close();
+    await application.close();
+    await teardownDatabase();
   });
 
   beforeEach(async () => {
-    //     Before each it (test) do ...
+    await clearDatabase();
   });
 
-  describe('MOCK', () => {
-    it('MOCK .... ', async () => {
-      const res = await httpRequest().get('/user').expect(200);
-      expect(res.status).toBe(200);
-      const body = (await res.body) as [];
-      expect(body).toEqual([]);
-    });
+  it("GET /user should return empty array", async () => {
+    await userManagement.givenUser({});
+    const res = await request(application.getHttpServer())
+      .get("/user")
+      .expect(200);
+    expect(res.status).toBe(200);
+    const body = (await res.body) as User[];
+    expect(body.length).toEqual(1);
   });
 });

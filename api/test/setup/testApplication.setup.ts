@@ -1,21 +1,21 @@
-import { INestApplication } from '@nestjs/common';
-import { Test, TestingModule } from '@nestjs/testing';
-import { TestModule } from './test.module';
+import "reflect-metadata";
 
-export async function createTestingApplication(): Promise<{
-  testingModule: TestingModule;
-  app: INestApplication;
-}> {
-  const moduleBuilder = Test.createTestingModule({
+import { INestApplication } from "@nestjs/common";
+import { Test, TestingModule } from "@nestjs/testing";
+import { TestModule } from "./test.module";
+
+export const createTestApplication = async (): Promise<{
+  application: INestApplication;
+  module: TestingModule;
+}> => {
+  const module: TestingModule = await Test.createTestingModule({
     imports: [TestModule],
-  });
-
-  const testingModule = await moduleBuilder.compile();
-  const app = testingModule.createNestApplication();
-  await app.init();
+  }).compile();
+  const application = module.createNestApplication();
+  await application.init();
 
   return {
-    testingModule,
-    app,
+    application,
+    module,
   };
-}
+};
