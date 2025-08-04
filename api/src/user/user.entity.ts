@@ -11,6 +11,9 @@ export class User {
   @Column({ type: "varchar" })
   password: string;
 
+  @Column({ type: "varchar", length: 24 })
+  salt: string;
+
   @Column({ type: "varchar" })
   firstName: string;
 
@@ -23,12 +26,14 @@ export class User {
   constructor(
     email: string,
     password: string,
+    salt: string,
     firstName: string,
     lastName: string,
     isActive: boolean,
   ) {
     this.email = email;
     this.password = password;
+    this.salt = salt;
     this.firstName = firstName;
     this.lastName = lastName;
     this.isActive = isActive;
