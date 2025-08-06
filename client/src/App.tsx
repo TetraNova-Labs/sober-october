@@ -1,27 +1,19 @@
 import React from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Login from "./pages/Login";
+import Navbar from "./components/Navbar";
+import ROUTES from "./routes/paths";
 
 const App: React.FC = () => {
   return (
     <div>
-      <nav style={{ marginBottom: 20 }}>
-        <Link to="/" style={{ marginRight: 10 }}>
-          Home
-        </Link>
-        <Link to="/about" style={{ marginRight: 10 }}>
-          About
-        </Link>
-        <Link to="/login" style={{ marginRight: 10 }}>
-          Login
-        </Link>
-      </nav>
+      <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/login" element={<Login />} />
+        <Route path={ROUTES.home} element={<Home />} />
+        <Route path={ROUTES.about} element={<About />} />
+        <Route path={ROUTES.login} element={<Login />} />
       </Routes>
     </div>
   );
