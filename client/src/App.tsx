@@ -1,17 +1,22 @@
-import { useState } from "react";
-import "./App.css";
-import config from "./config.ts";
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Login from "./pages/Login";
+import Navbar from "./components/Navbar";
+import ROUTES from "./routes/paths";
 
-function App() {
-  const [count, setCount] = useState(0);
-  console.log("Hello");
-
+const App: React.FC = () => {
   return (
-    <>
-      <p>env config dump (test): {config.apiEndpoint}</p>
-      <button onClick={() => setCount(count + 1)}>{count}</button>
-    </>
+    <div>
+      <Navbar />
+      <Routes>
+        <Route path={ROUTES.home} element={<Home />} />
+        <Route path={ROUTES.about} element={<About />} />
+        <Route path={ROUTES.login} element={<Login />} />
+      </Routes>
+    </div>
   );
-}
+};
 
 export default App;
