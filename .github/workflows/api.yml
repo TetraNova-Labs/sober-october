@@ -26,7 +26,7 @@ jobs:
           # root password for initial setup
           MYSQL_ROOT_PASSWORD: root
           # create your CI user & DB
-          MYSQL_DATABASE:      sober-october
+          MYSQL_DATABASE:      sober-october-test
           MYSQL_USER:          ciuser
           MYSQL_PASSWORD:      cipassword
           # allow TCP connections from anywhere

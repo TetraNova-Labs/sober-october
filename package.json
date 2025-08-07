@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "lint-staged": {
-    "client/**/*.{js,ts,jsx,tsx}": "bash -c 'cd client && pnpm run lint || exit 1'",
-    "api/**/*.{js,ts}": "bash -c 'cd api && pnpm run lint || exit 1'"
+    "client/**/*.{js,ts,jsx,tsx}": "bash -c 'cd client && make lint-fix || exit 1'",
+    "api/**/*.{js,ts}": "bash -c 'cd api && make lint-fix || exit 1'"
   },
   "scripts": {
     "prepare": "husky"

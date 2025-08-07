@@ -1,13 +1,15 @@
-import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-import configuration from './config/configuration';
-import { envSchema } from './config/validationSchema';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { SandboxModule } from './sandbox/sandbox.module';
-import { UserModule } from './user/user.module';
-import { SandboxController } from './sandbox/sandbox.controller';
-import { AppDataSource } from '../dataSource';
-import { AuthModule } from './auth/auth.module';
+import { Module } from "@nestjs/common";
+import { ConfigModule, ConfigService } from "@nestjs/config";
+import configuration from "./config/configuration";
+import { EnvSchema, envSchema } from "./config/validationSchema";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { SandboxModule } from "./sandbox/sandbox.module";
+import { UserModule } from "./user/user.module";
+import { SandboxController } from "./sandbox/sandbox.controller";
+import { typeOrmAsyncConfig } from "../dataSource";
+import { AuthModule } from "./auth/auth.module";
+import { User } from "./user/user.entity";
+import path from "path";
 
 @Module({
   imports: [
@@ -16,11 +18,8 @@ import { AuthModule } from './auth/auth.module';
       validate: (config) => envSchema.parse(config),
       isGlobal: true,
     }),
-    TypeOrmModule.forRootAsync({
-      useFactory: () => ({
-        ...AppDataSource.options,
-      }),
-    }),
+    TypeOrmModule.forFeature([User]),
+    TypeOrmModule.forRootAsync(typeOrmAsyncConfig),
     SandboxModule,
     UserModule,
     AuthModule,

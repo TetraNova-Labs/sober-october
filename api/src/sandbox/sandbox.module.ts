@@ -1,5 +1,5 @@
-import { Module } from '@nestjs/common';
-import { UserModule } from '../user/user.module';
+import { Module } from "@nestjs/common";
+import { UserModule } from "../user/user.module";
 
 /*
     This module imports the UserModule, where the UserEntity relies.

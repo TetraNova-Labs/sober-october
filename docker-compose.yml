@@ -20,7 +20,7 @@ services:
     environment:
       TZ: "Europe/Prague"
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE:   myappdb      # optional
+      #MYSQL_DATABASE:   sober-october-test #
       MYSQL_USER:       appuser
       MYSQL_PASSWORD:   supersecret
     volumes:
