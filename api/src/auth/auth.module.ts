@@ -5,6 +5,7 @@ import { UserModule } from "../user/user.module";
 import { JwtModule } from "@nestjs/jwt";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { EnvSchema } from "../config/validationSchema";
+import { LocalStrategy } from "./strategy/local.strategy";
 
 @Module({
   imports: [
@@ -21,7 +22,7 @@ import { EnvSchema } from "../config/validationSchema";
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [AuthService, LocalStrategy],
   exports: [AuthService],
 })
 export class AuthModule {}
