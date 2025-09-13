@@ -1,5 +1,5 @@
 # Multi-stage build for React app
-FROM node:24-alpine AS base
+FROM node:24-alpine AS build
 
 # Install pnpm
 RUN npm install -g pnpm
@@ -22,26 +22,26 @@ RUN pnpm run build
 # Production stage with nginx
 FROM nginx:alpine AS production
 
-# Copy built assets from base stage
-COPY --from=base /app/dist /usr/share/nginx/html
+# Copy built assets from build stage
+COPY --from=build /app/dist /usr/share/nginx/html
 
 # Copy custom nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Create non-root user
-RUN addgroup -g 1001 -S nginx
-RUN adduser -S react -u 1001
+## Create non-root user
+#RUN addgroup -g 1001 -S nginx
+#RUN adduser -S react -u 1001
+#
+## Change ownership of nginx directories
+#RUN chown -R react:nginx /usr/share/nginx/html
+#RUN chown -R react:nginx /var/cache/nginx
+#RUN chown -R react:nginx /var/log/nginx
+#RUN chown -R react:nginx /etc/nginx/conf.d
+#RUN touch /var/run/nginx.pid
+#RUN chown -R react:nginx /var/run/nginx.pid
 
-# Change ownership of nginx directories
-RUN chown -R react:nginx /usr/share/nginx/html
-RUN chown -R react:nginx /var/cache/nginx
-RUN chown -R react:nginx /var/log/nginx
-RUN chown -R react:nginx /etc/nginx/conf.d
-RUN touch /var/run/nginx.pid
-RUN chown -R react:nginx /var/run/nginx.pid
-
-# Switch to non-root user
-USER react
+## Switch to non-root user
+#USER react
 
 # Expose port
 EXPOSE 80
