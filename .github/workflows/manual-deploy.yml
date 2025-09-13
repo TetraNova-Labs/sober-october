@@ -1,0 +1,58 @@
+name: Promote Image (manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      service:
+        description: "Which service to promote?"
+        type: choice
+        required: true
+        options:
+          - client
+          - api
+      source_tag:
+        description: "Immutable tag to promote (e.g. sha-a1b2c3d)"
+        required: true
+      target_tag:
+        description: "Channel tag to update (e.g. prod, main, stable)"
+        required: true
+        default: "prod"
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    env:
+      IMAGE_CLIENT: ghcr.io/${{ github.repository }}-client
+      IMAGE_API: ghcr.io/${{ github.repository }}-api
+    steps:
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Select image
+        run: |
+          OWNER_LC="${GITHUB_REPOSITORY_OWNER,,}"
+          REPO="${GITHUB_REPOSITORY#*/}"
+          REPO_LC="$(echo "$REPO" | tr '[:upper:]' '[:lower:]')"
+          if [ "${{ inputs.service }}" = "client" ]; then
+            echo "IMAGE=ghcr.io/${OWNER_LC}/${REPO_LC}-client" >> $GITHUB_ENV
+          else
+            echo "IMAGE=ghcr.io/${OWNER_LC}/${REPO_LC}-api" >> $GITHUB_ENV
+          fi
+
+      - name: Promote by retagging manifest
+        run: |
+          SRC="${IMAGE}:${{ inputs.source_tag }}"
+          TGT="${IMAGE}:${{ inputs.target_tag }}"
+          docker buildx imagetools create -t "${TGT}" "${SRC}"
+
+      - name: Show target digest (audit)
+        run: |
+          docker buildx imagetools inspect "${IMAGE}:${{ inputs.target_tag }}"
