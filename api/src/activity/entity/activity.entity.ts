@@ -13,7 +13,7 @@ export class ActivityEntity {
   createdAt: Date;
 
   @Column()
-  userId: string;
+  userId: number;
 
   @Column()
   distance: number;
@@ -21,7 +21,7 @@ export class ActivityEntity {
   constructor(
     activityType: ActivityType,
     createdAt: Date,
-    userId: string,
+    userId: number,
     distance: number,
   ) {
     this.activityType = activityType;

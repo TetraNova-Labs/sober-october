@@ -7,7 +7,7 @@ import { AddActivityCommand } from "./command/addActivity.command";
 export class ActivityService {
   constructor(private commandBus: CommandBus) {}
 
-  async addActivity(userId: string, addActivityDto: AddActivityDto) {
+  async addActivity(userId: number, addActivityDto: AddActivityDto) {
     return this.commandBus.execute(
       new AddActivityCommand(
         userId,

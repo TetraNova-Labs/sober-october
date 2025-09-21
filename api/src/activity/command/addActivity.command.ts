@@ -5,7 +5,7 @@ export class AddActivityCommand extends Command<{
   activityId: string;
 }> {
   constructor(
-    public readonly userId: string,
+    public readonly userId: number,
     public readonly activityType: ActivityType,
     public readonly distance: number,
     public readonly createdAt: Date,
