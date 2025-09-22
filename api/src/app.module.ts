@@ -9,7 +9,8 @@ import { SandboxController } from "./sandbox/sandbox.controller";
 import { typeOrmAsyncConfig } from "../dataSource";
 import { AuthModule } from "./auth/auth.module";
 import { User } from "./user/user.entity";
-import path from "path";
+import { CqrsModule } from "@nestjs/cqrs";
+import { ActivityModule } from "./activity/activity.module";
 
 @Module({
   imports: [
@@ -18,11 +19,13 @@ import path from "path";
       validate: (config) => envSchema.parse(config),
       isGlobal: true,
     }),
+    CqrsModule.forRoot(),
     TypeOrmModule.forFeature([User]),
     TypeOrmModule.forRootAsync(typeOrmAsyncConfig),
     SandboxModule,
     UserModule,
     AuthModule,
+    ActivityModule,
   ],
   controllers: [SandboxController],
   providers: [],
