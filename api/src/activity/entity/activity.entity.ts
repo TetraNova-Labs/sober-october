@@ -3,8 +3,8 @@ import { ActivityType } from "../dto/addActivity.dto";
 
 @Entity()
 export class ActivityEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
   @Column()
   activityType: ActivityType;
