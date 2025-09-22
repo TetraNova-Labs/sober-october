@@ -6,7 +6,7 @@ export class ActivityEntity {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Column()
+  @Column({ type: "varchar" })
   activityType: ActivityType;
 
   @Column()
